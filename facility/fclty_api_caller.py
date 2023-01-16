@@ -1,3 +1,4 @@
+from fclty_tools import *
 import requests
 from bs4 import BeautifulSoup
 import xmltodict
@@ -15,7 +16,7 @@ class FcltyCaller:
         url = "http://www.kopis.or.kr/openApi/restful/prfplc"
         params = {
             'service': self.service_key,
-            'cpage': 1,
+            'cpage': 2,
             'rows': row
         }
         response = requests.get(url, params=params).text
@@ -38,10 +39,10 @@ class FcltyCaller:
         data = {}
         data["facility_id"] = xmlobj.find("mt10id").string
         data["facility_name"] = xmlobj.find("fcltynm").string
-        data["facility_telno"] = xmlobj.find(
-            "telno").string if xmlobj.find("telno").string != ' ' else None
-        data["facility_relateurl"] = xmlobj.find(
-            "relateurl").string if xmlobj.find("relateurl").string != ' ' else None
+        data["facility_telno"] = Validation().check_none(
+            xmlobj.find("telno").string)
+        data["facility_relateurl"] = Validation().check_none(
+            xmlobj.find("relateurl").string)
         data["facility_address"] = xmlobj.find("adres").string
         data["facility_latitude"] = float(xmlobj.find("la").string)
         data["facility_longitude"] = float(xmlobj.find("lo").string)

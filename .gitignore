@@ -1,3 +1,4 @@
 facility/__pycache__/
+performance/__pycache__/
 secret_data.pickle
 test.py

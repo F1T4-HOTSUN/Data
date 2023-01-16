@@ -18,14 +18,14 @@ class Validation:
         return content if content != ' ' else None
 
 
-# class ParseToJson:
-#     def __init__(self):
-#         pass
+class ParseToJson:
+    def __init__(self):
+        pass
 
-#     def xml_to_json(self, xml_str):
-#         if (Validation().check_none(xml_str) == None):
-#             return None
-#         return json.dumps(xmltodict.parse(xml_str), indent=4, ensure_ascii=False)
+    def xml_to_json(self, xml_str):
+        if (Validation().check_none(xml_str) == None):
+            return None
+        return json.dumps(xmltodict.parse(xml_str), indent=4, ensure_ascii=False)
 
 
 # class ParseToTable:
