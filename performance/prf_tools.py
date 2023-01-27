@@ -30,6 +30,13 @@ class ParseToJson:
         return json.dumps(xmltodict.parse(xml_str), indent=4, ensure_ascii=False)
 
 
+class ParseToList:
+    def __init__(self):
+        pass
+
+    def xml_to_list(self, xml_str):
+        return list(map(lambda x: x.string, xml_str))
+
 # class ParseToTable:
 #     def __init__(self):
 #         pass
