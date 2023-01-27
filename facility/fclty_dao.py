@@ -1,6 +1,8 @@
 from pymysql import *
 from pickle import *
 
+from pymysql import cursors
+
 
 class FcltyDAO:
     def __init__(self):
