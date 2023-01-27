@@ -1,5 +1,9 @@
+from sqlite3 import connect
+
 from pymysql import *
 from pickle import *
+
+from pymysql import cursors
 
 
 class PrfDAO:
@@ -18,7 +22,7 @@ class PrfDAO:
         self.curs = self.conn.cursor(cursors.DictCursor)
 
     def insert_prf_data(self, data):
-        sql = ("INSERT INTO performance VALUES (%(performance_id)s, " +
+        sql = ("INSERT INTO performance(performance_id, prf_title, prf_start_date, prf_end_date, prf_cast, prf_crew, prf_runtime, prf_prd_comp, prf_viewing_age, prf_ticket_price, prf_poster, prf_story, prf_genre, prf_openrun, prf_styurls, prf_state, prf_loaded_at, facility_id) VALUES (%(performance_id)s, " +
                "%(prf_title)s, %(prf_start_date)s, " +
                "%(prf_end_date)s, %(prf_cast)s, %(prf_crew)s, %(prf_runtime)s, " +
                "%(prf_prd_comp)s, %(prf_viewing_age)s, %(prf_ticket_price)s, " +
