@@ -43,8 +43,8 @@ class PrfDAO:
 
     def insert_session_data(self, data):
         sql = (
-                "INSERT INTO prf_session(performance_id, prf_session_date, prf_session_time, prf_remaining_seat, prf_total_seat) VALUES " +
+                "INSERT INTO prf_session(performance_id, prf_session_date, prf_session_time, remaining_seat, total_seat) VALUES " +
                 "(%(performance_id)s, %(prf_session_date)s, " +
-                "%(prf_session_time)s, %(prf_remaining_seat)s, %(prf_total_seat)s);")
+                "%(prf_session_time)s, %(remaining_seat)s, %(total_seat)s);")
         self.curs.executemany(sql, data)
         self.conn.commit()

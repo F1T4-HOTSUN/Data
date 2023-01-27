@@ -1,11 +1,8 @@
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
-import pandas as pd
-from pickle import *
-from pandas import json_normalize
 
+from pickle import *
 
 class HolCaller:
     def __init__(self):
@@ -27,7 +24,6 @@ class HolCaller:
 
         xmlobj = BeautifulSoup(response, 'lxml-xml')
 
-        # list = [id.string for id in xmlobj.find_all("locdate")]
         l = list(map(lambda x: x.string[:4] + '-' + x.string[4:6] + '-' + x.string[6:8], xmlobj.find_all("locdate")))
 
         return l
