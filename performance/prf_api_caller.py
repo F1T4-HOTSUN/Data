@@ -66,5 +66,6 @@ class PrfCaller:
         data["prf_state"] = xmlobj.find("prfstate").string
         data["prf_loaded_at"] = datetime.datetime.now().strftime(
             '%Y-%m-%d %H:%M:%S')
+        data["dtguidance"] = xmlobj.find("dtguidance").string
 
         return data
