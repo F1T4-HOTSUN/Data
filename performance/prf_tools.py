@@ -25,6 +25,8 @@ class ParseToJson:
     def xml_to_json(self, xml_str):
         if (Validation().check_none(xml_str) == None):
             return None
+        if (Validation().check_none(xml_str) == 'None'):
+            return None
         return json.dumps(xmltodict.parse(xml_str), indent=4, ensure_ascii=False)
 
 
