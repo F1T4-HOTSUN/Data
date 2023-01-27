@@ -62,8 +62,7 @@ class PrfCaller:
         ).check_none(xmlobj.find("sty").string)
         data["prf_genre"] = xmlobj.find("genrenm").string
         data["prf_openrun"] = xmlobj.find("openrun").string
-        data["prf_styurls"] = ParseToJson().xml_to_json(
-            str(xmlobj.find("styurls")).replace("\n", ""))
+        data["prf_styurls"] = str(ParseToList().xml_to_list(xmlobj.findAll("styurl"))).replace("\'", "").replace("[","").replace("]","")
         data["prf_state"] = xmlobj.find("prfstate").string
         data["prf_loaded_at"] = datetime.datetime.now().strftime(
             '%Y-%m-%d %H:%M:%S')
