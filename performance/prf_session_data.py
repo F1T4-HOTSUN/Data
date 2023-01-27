@@ -1,5 +1,8 @@
 import time
 import re
+
+import pandas as pd
+
 from hol_api_caller import *
 
 
@@ -62,8 +65,8 @@ class Session:
                         'performance_id': prf_id,
                         'prf_session_date': holiday,
                         'prf_session_time': hol_pop_list[hol_idx],
-                        'prf_remaining_seat': 200,
-                        'prf_total_seat': 200
+                        'remaining_seat': 200,
+                        'total_seat': 200
                     }
                     data.append(date_time)
         return data
@@ -80,7 +83,7 @@ class Session:
                     'performance_id': prf_id,
                     'prf_session_date': k,
                     'prf_session_time': sp_time[j],
-                    'prf_remaining_seat': 200,
-                    'prf_total_seat': 200
+                    'remaining_seat': 200,
+                    'total_seat': 200
                 }
                 data.append(date_time)
