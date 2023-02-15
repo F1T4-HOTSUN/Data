@@ -1,16 +1,14 @@
+import os
+
 from fclty_tools import *
 import requests
 from bs4 import BeautifulSoup
-import xmltodict
-from pickle import *
 
 
 class FcltyCaller:
     def __init__(self):
         data = {}
-        with open("secret_data.pickle", "rb") as sd:
-            data = load(sd)
-        self.service_key = data.get("service_key")
+        self.service_key = os.environ['KOPIS_SERVICE_KEY']
 
     def get_id_list(self, row):
         url = "http://www.kopis.or.kr/openApi/restful/prfplc"

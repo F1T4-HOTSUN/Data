@@ -3,9 +3,6 @@ import re
 
 import pandas as pd
 
-from hol_api_caller import *
-
-
 class Session:
     def __init__(self):
         self.day = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일']

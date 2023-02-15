@@ -1,7 +1,5 @@
-import json
 import datetime
-from pickle import *
-import xmltodict
+import os
 from bs4 import BeautifulSoup
 import requests
 from prf_tools import *
@@ -10,9 +8,7 @@ from prf_tools import *
 class PrfCaller:
     def __init__(self):
         data = {}
-        with open("secret_data.pickle", "rb") as sd:
-            data = load(sd)
-        self.service_key = data.get("service_key")
+        self.service_key = os.environ['KOPIS_SERVICE_KEY']
 
     def get_id_list(self, row, prfstate):
         url = "http://kopis.or.kr/openApi/restful/pblprfr"

@@ -1,15 +1,11 @@
-from datetime import datetime
+import os
 import requests
 from bs4 import BeautifulSoup
-
-from pickle import *
 
 class HolCaller:
     def __init__(self):
         data = {}
-        with open("secret_data.pickle", "rb") as sd:
-            data = load(sd)
-        self.service_key = data.get("hol_service_key")
+        self.service_key = os.environ['HOL_SERVICE_KEY']
 
     def get_holiday(self, year):
         url = "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo"

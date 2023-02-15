@@ -1,5 +1,6 @@
+import os
+
 from pymysql import *
-from pickle import *
 
 from pymysql import cursors
 
@@ -7,20 +8,20 @@ from pymysql import cursors
 class FcltyDAO:
     def __init__(self):
         data = {}
-        with open("secret_data.pickle", "rb") as sd:
-            data = load(sd)
         self.conn = connect(
-            user=data["database"].get("user"),
-            password=data["database"].get("password"),
-            host=data["database"].get("host"),
-            port=data["database"].get("port"),
-            db=data["database"].get("db"),
+            user=os.environ['DATABASE_USER'],
+            password=os.environ['DATABASE_PASSWORD'],
+            host=os.environ['DATABASE_HOST'],
+            port=os.environ['DATABASE_PORT'],
+            db=os.environ['DATABASE_NAEM'],
             charset='utf8'
         )
         self.curs = self.conn.cursor(cursors.DictCursor)
 
+
     def insert_data(self, data):
-        sql = "INSERT INTO facility VALUES (%(facility_id)s, %(facility_name)s, %(facility_telno)s, %(facility_relateurl)s, %(facility_address)s, %(facility_latitude)s, %(facility_longitude)s);"
+        sql = "INSERT INTO facility(facility_id, facility_name, facility_telno, facility_relateurl, facility_address, facility_latitude, facility_longitude) " \
+              "VALUES (%(facility_id)s, %(facility_name)s, %(facility_telno)s, %(facility_relateurl)s, %(facility_address)s, %(facility_latitude)s, %(facility_longitude)s);"
         self.curs.executemany(sql, data)
         self.conn.commit()
 
