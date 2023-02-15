@@ -13,7 +13,7 @@ class FcltyDAO:
             password=os.environ['DATABASE_PASSWORD'],
             host=os.environ['DATABASE_HOST'],
             port=os.environ['DATABASE_PORT'],
-            db=os.environ['DATABASE_NAEM'],
+            db=os.environ['DATABASE_NAME'],
             charset='utf8'
         )
         self.curs = self.conn.cursor(cursors.DictCursor)
