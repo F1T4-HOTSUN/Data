@@ -2,7 +2,6 @@ import os
 from sqlite3 import connect
 
 from pymysql import *
-from pickle import *
 
 from pymysql import cursors
 
@@ -10,8 +9,6 @@ from pymysql import cursors
 class PrfDAO:
     def __init__(self):
         data = {}
-        with open("secret_data.pickle", "rb") as sd:
-            data = load(sd)
         self.conn = connect(
             user=os.environ['DATABASE_USER'],
             password=os.environ['DATABASE_PASSWORD'],
