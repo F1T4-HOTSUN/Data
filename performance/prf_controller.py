@@ -1,8 +1,9 @@
+from performance.hol_api_caller import HolCaller
 from prf_api_caller import *
 from prf_dao import *
 from prf_session_data import *
 
-new_list = PrfCaller().get_id_list(100, "01")
+new_list = PrfCaller().get_id_list(10000, "01")
 old_list = PrfDAO().select_prf_id_list()
 added_performances = ListCheck().get_added_list(new_list, old_list)
 
