@@ -16,7 +16,7 @@ class PrfDAO:
             user=os.environ['DATABASE_USER'],
             password=os.environ['DATABASE_PASSWORD'],
             host=os.environ['DATABASE_HOST'],
-            port=os.environ['DATABASE_PORT'],
+            port=int(os.environ['DATABASE_PORT']),
             db=os.environ['DATABASE_NAME'],
             charset='utf8'
         )
