@@ -4,4 +4,4 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . ./facility
 
-CMD ["python", "fclty_controller.py"]
+CMD ["python", "./facility/fclty_controller.py"]
