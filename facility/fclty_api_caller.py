@@ -14,7 +14,7 @@ class FcltyCaller:
         url = "http://www.kopis.or.kr/openApi/restful/prfplc"
         params = {
             'service': self.service_key,
-            'cpage': 2,
+            'cpage': 1,
             'rows': row
         }
         response = requests.get(url, params=params).text
