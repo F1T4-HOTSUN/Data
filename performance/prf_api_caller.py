@@ -31,9 +31,12 @@ class PrfCaller:
         params = {
             'service': self.service_key
         }
-
         response = requests.get(url, params=params).text
         xmlobj = BeautifulSoup(response, 'lxml-xml').find("db")
+
+        dtguidance = xmlobj.find("dtguidance").string
+        if dtguidance == ' ' or dtguidance == ' ':
+            return None
 
         data = {}
         data["performance_id"] = xmlobj.find("mt20id").string

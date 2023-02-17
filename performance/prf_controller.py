@@ -12,7 +12,9 @@ added_performances = ListCheck().get_added_list(new_list, old_list)
 
 data = []
 for id in added_performances:
-    data.append(PrfCaller().get_performance(id))
+    getData = PrfCaller().get_performance(id)
+    if getData != None:
+        data.append(getData)
 
 hol_list = HolCaller().get_holiday(datetime.now().year)
 hol_list += HolCaller().get_holiday(datetime.now().year+1)
