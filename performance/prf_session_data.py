@@ -11,7 +11,7 @@ class Session:
     def session_data(self, prf_id, dtguidance, prf_start_date, prf_end_date, hol_list):
         data = []
         prf_hol_list = []
-
+        hol_pop_list = []
         hol_flag = False
 
         if 'HOL' in dtguidance:
