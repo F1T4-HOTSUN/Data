@@ -6,6 +6,14 @@ from prf_api_caller import *
 from prf_dao import *
 from prf_session_data import *
 from datetime import datetime
+import logging
+
+logger = logging.getLogger()
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(formatter)
+logger.addHandler(stream_handler)
 
 fclty_new_list = FcltyCaller().get_id_list(10000)
 old_list = FcltyDAO().select_id_list()
