@@ -31,8 +31,8 @@ for id in added_facilities:
 FcltyDAO().insert_data(fclty_data)
 
 
-prf_new_list = PrfCaller().get_id_list(100, '01')
-prf_new_list.extend(PrfCaller().get_id_list(100, '02'))
+prf_new_list = PrfCaller().get_id_list(5000, '01')
+prf_new_list.extend(PrfCaller().get_id_list(1000, '02'))
 old_list = PrfDAO().select_prf_id_list()
 added_performances = ListCheck().get_added_list(prf_new_list, old_list)
 
