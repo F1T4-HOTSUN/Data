@@ -3,7 +3,7 @@ from sqlite3 import connect
 from pymysql import *
 from pymysql import cursors
 from datetime import datetime, timedelta
-
+from pytz import timezone
 class RankDAO:
     def __init__(self):
         self.conn = connect(
@@ -33,7 +33,7 @@ class RankDAO:
     def delete_rank_data(self):
         try:
             sql = ("DELETE FROM prf_rank WHERE basedate <= %s;")
-            self.curs.execute(sql, (datetime.now().date() - timedelta(3)).strftime("%Y%m%d"))
+            self.curs.execute(sql, (datetime.now(timezone('Asia/Seoul')).date() - timedelta(3)).strftime("%Y%m%d"))
             self.conn.commit()
         except Exception as e:
             print("Exception occured:{}".format(e))

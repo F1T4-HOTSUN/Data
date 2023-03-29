@@ -8,6 +8,7 @@ from prf_api_caller import *
 from prf_dao import *
 from prf_session_data import *
 from datetime import datetime
+from pytz import timezone
 import logging
 
 
@@ -43,8 +44,8 @@ for id in added_performances:
     if getData != None:
         prf_data.append(getData)
 
-hol_list = HolCaller().get_holiday(datetime.now().year)
-hol_list += HolCaller().get_holiday(datetime.now().year+1)
+hol_list = HolCaller().get_holiday(datetime.now(timezone('Asia/Seoul')).year)
+hol_list += HolCaller().get_holiday(datetime.now(timezone('Asia/Seoul')).year+1)
 
 session_list = []
 for prf in prf_data:
