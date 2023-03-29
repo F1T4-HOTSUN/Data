@@ -2,14 +2,19 @@ from fclty_tools import *
 from fclty_api_caller import FcltyCaller
 from fclty_dao import *
 from hol_api_caller import HolCaller
+from rank_dao import RankDAO
+from rank_api_caller import RankCaller
 from prf_api_caller import *
 from prf_dao import *
 from prf_session_data import *
 from datetime import datetime
 import logging
 
+
 logger = logging.getLogger()
+logger.setLevel("DEBUG")
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
 
 stream_handler = logging.StreamHandler()
 stream_handler.setFormatter(formatter)
@@ -45,6 +50,11 @@ session_list = []
 for prf in prf_data:
     session_list += Session().session_data(prf['performance_id'], prf['dtguidance'], prf['prf_start_date'], prf['prf_end_date'], hol_list)
 
-
 PrfDAO().insert_prf_data(prf_data)
 PrfDAO().insert_session_data(session_list)
+
+rank_data = RankCaller().get_rank()
+RankDAO().delete_rank_data()
+RankDAO().insert_rank_data(rank_data)
+
+
