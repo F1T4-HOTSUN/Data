@@ -8,8 +8,11 @@ from prf_session_data import *
 from datetime import datetime
 import logging
 
+
 logger = logging.getLogger()
+logger.setLevel("DEBUG")
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
 
 stream_handler = logging.StreamHandler()
 stream_handler.setFormatter(formatter)
