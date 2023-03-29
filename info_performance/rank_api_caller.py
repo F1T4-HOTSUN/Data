@@ -8,7 +8,7 @@ from pytz import timezone
 
 class RankCaller:
     def __init__(self):
-        self.service_key = '5d8e9c530c12433397b94fc06931bed2' # os.environ['KOPIS_SERVICE_KEY']
+        self.service_key = os.environ['KOPIS_SERVICE_KEY']
 
     def get_rank(self):
         yesterday = (datetime.now(timezone('Asia/Seoul')).date() - timedelta(1)).strftime("%Y%m%d")
