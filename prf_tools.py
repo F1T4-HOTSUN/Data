@@ -15,7 +15,7 @@ class Validation:
         pass
 
     def check_none(self, content):
-        return content if content != ' ' or content != '' else None
+        return content if content != ' ' and content != '' else None
 
 
 class ParseToJson:
