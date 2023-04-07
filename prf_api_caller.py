@@ -35,7 +35,11 @@ class PrfCaller:
         xmlobj = BeautifulSoup(response, 'lxml-xml').find("db")
 
         dtguidance = xmlobj.find("dtguidance").string
-        if dtguidance == ' ' or dtguidance == ' ':
+        if dtguidance == ' ' or dtguidance == '':
+            return None
+
+        prf_ticket_price = xmlobj.find("pcseguidance").string
+        if prf_ticket_price == ' ' or prf_ticket_price == '':
             return None
 
         data = {}
