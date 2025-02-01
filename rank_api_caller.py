@@ -15,7 +15,9 @@ class RankCaller:
         url = "http://kopis.or.kr/openApi/restful/boxoffice"
         params = {
             'service': self.service_key,
-            'ststype': 'day',
+            'stdate': yesterday,
+            #'ststype': 'day',
+            'eddate': yesterday
             'date': yesterday
         }
 
