@@ -17,7 +17,7 @@ class RankCaller:
             'service': self.service_key,
             'stdate': yesterday,
             #'ststype': 'day',
-            'eddate': yesterday
+            'eddate': yesterday,
             'date': yesterday
         }
 
