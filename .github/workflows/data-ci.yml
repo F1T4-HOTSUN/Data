@@ -1,6 +1,9 @@
 name: tickeaka-data
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -27,33 +30,33 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: roheejae/ticketaka-data
+          images: harbor.hotsun.store/ticketaka/ticketaka-data
           tag-semver: |
             {{version}}
             {{major}}.{{minor}}
       -
+        name: Login to Harbor
+        run: |
+          echo "${{ secrets.HARBOR_PASSWORD }}" | docker login harbor.hotsun.store -u "${{ secrets.HARBOR_USERNAME }}" --password-stdin
+      -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       -
-        name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
+        name: Build and push to Harbor
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
+          build-args: |
+            "REACT_APP_NAVER_SECRET=${{ secrets.REACT_APP_NAVER_SECRET }}"
           platforms: linux/amd64
           push: true
-          tags: roheejae/ticketaka-data:${{ steps.tag_version.outputs.new_tag }}
+          tags: harbor.hotsun.store/ticketaka/ticketaka-data:${{ steps.tag_version.outputs.new_tag }}
       - name: Checkout for Kustomize repository
         uses: actions/checkout@v2
         with:
           # kubernetes yaml 파일 저장
-          repository: Project-Ticketaka/manifest # k8s yaml 파일이 있는 repo
+          repository: F1T4-HOTSUN/manifest # k8s yaml 파일이 있는 repo
           ref: main  # branch 이름
           # 내 repository에 push 하기 위한 Personal Access Token이 필요
           token: ${{ secrets.PAT }} # Github Action token을 발급받아서 repo secrect에 등록해줘야한다
@@ -66,7 +69,7 @@ jobs:
         run: |
           pwd
           cd manifest/resources/info
-          kustomize edit set image roheejae/ticketaka-data:${{ steps.tag_version.outputs.new_tag }}
+          kustomize edit set image harbor.hotsun.store/ticketaka/ticketaka-data:${{ steps.tag_version.outputs.new_tag }}
           cat kustomization.yaml
       # 수정된 kustomization.yaml 파일 commit push
       - name: Commit manifest files
@@ -74,8 +77,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
           cd manifest
-          git config --global user.email "rhj0830@gmail.com"
-          git config --global user.name "HEEJAERO"
+          git config --global user.email ${{ secrets.USER_EMAIL_MJ }}
+          git config --global user.name ${{ secrets.USER_NAME_MJ }}
           git config --global github.token ${{ secrets.PAT }}
-          git commit -am "Update image tag ${{ steps.tag_version.outputs.new_tag }}"
+          git commit -am "Update image tag harbor.hotsun.store/ticketaka/ticketaka-data:${{ steps.tag_version.outputs.new_tag }}"
           git push -u origin main
