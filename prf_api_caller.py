@@ -12,19 +12,19 @@ class PrfCaller:
         data = {}
         self.service_key = os.environ['KOPIS_SERVICE_KEY']
 
-    def get_id_list(self, row, prfstate):
+    def get_id_list(self, row, prfstate, page):
         yesterday = (datetime.now(timezone('Asia/Seoul')).date() - timedelta(1)).strftime("%Y%m%d")
         url = "http://kopis.or.kr/openApi/restful/pblprfr"
         params = {
             'service': self.service_key,
-            'cpage': 1,
+            'cpage': page,
             'rows': row,
             #'prfstate': prfstate,
             # 데이터가 최대한 필요해서 임시로 날짜 넣음
             #'eddate': yesterday,
             #'stdate': yesterday
             'eddate': yesterday,
-            'stdate': '20240101'
+            'stdate': '20100101'
         }
         response = requests.get(url, params=params).text
 
