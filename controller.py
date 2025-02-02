@@ -30,7 +30,8 @@ for id in added_facilities:
     fclty_data.append(FcltyCaller().get_facility(id))
 
 FcltyDAO().insert_data(fclty_data)
-
+# 추가
+FcltyDAO().commit()
 
 prf_new_list = PrfCaller().get_id_list(5000, '01')
 prf_new_list.extend(PrfCaller().get_id_list(1000, '02'))
@@ -53,9 +54,12 @@ for prf in prf_data:
 
 PrfDAO().insert_prf_data(prf_data)
 PrfDAO().insert_session_data(session_list)
+# 추가
+PrfDAO().commit()
 
 rank_data = RankCaller().get_rank()
 RankDAO().delete_rank_data()
 RankDAO().insert_rank_data(rank_data)
-
+# 추가
+RankDAO().commit()
 
