@@ -21,9 +21,11 @@ stream_handler = logging.StreamHandler()
 stream_handler.setFormatter(formatter)
 logger.addHandler(stream_handler)
 
-fclty_new_list = FcltyCaller().get_id_list(10000)
+fclty_new_list = FcltyCaller().get_id_list(100)
+print('fclty_new_list :', fclty_new_list)
 old_list = FcltyDAO().select_id_list()
 added_facilities = ListCheck().get_added_list(fclty_new_list, old_list)
+print('added_facilities:', added_facilities)
 
 fclty_data = []
 for id in added_facilities:

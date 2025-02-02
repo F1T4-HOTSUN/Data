@@ -19,11 +19,13 @@ class PrfCaller:
             'service': self.service_key,
             'cpage': 1,
             'rows': row,
-            'prfstate': prfstate,
+            #'prfstate': prfstate,
             'eddate': yesterday,
             'stdate': yesterday
         }
         response = requests.get(url, params=params).text
+
+        print('prf_res', response)
 
         xmlobj = BeautifulSoup(response, 'lxml-xml')
 
