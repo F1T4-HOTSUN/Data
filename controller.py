@@ -53,7 +53,7 @@ for prf in prf_data:
 PrfDAO().insert_prf_data(prf_data)
 PrfDAO().insert_session_data(session_list)
 
-rank_data = RankCaller().get_rank()
-RankDAO().delete_rank_data()
-RankDAO().insert_rank_data(rank_data)
+# rank_data = RankCaller().get_rank()
+# RankDAO().delete_rank_data()
+# RankDAO().insert_rank_data(rank_data)
 
