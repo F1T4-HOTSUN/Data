@@ -75,7 +75,7 @@ class PrfCaller:
         data["prf_styurls"] = Validation().check_none(
             str(ParseToList().xml_to_list(xmlobj.findAll("styurl"))).replace("\'", "").replace("[","").replace("]","") )
         data["prf_state"] = xmlobj.find("prfstate").string
-        data["prf_loaded_at"] = datetime.datetime.now().strftime(
+        data["prf_loaded_at"] = datetime.now().strftime(
             '%Y-%m-%d %H:%M:%S')
         data["dtguidance"] = xmlobj.find("dtguidance").string
 
