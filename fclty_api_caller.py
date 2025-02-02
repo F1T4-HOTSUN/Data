@@ -3,8 +3,6 @@ import os
 from fclty_tools import *
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime, timedelta
-from pytz import timezone
 
 
 class FcltyCaller:
@@ -13,14 +11,11 @@ class FcltyCaller:
         self.service_key = os.environ['KOPIS_SERVICE_KEY']
 
     def get_id_list(self, row):
-        yesterday = (datetime.now(timezone('Asia/Seoul')).date() - timedelta(1)).strftime("%Y%m%d")
         url = "http://www.kopis.or.kr/openApi/restful/prfplc"
         params = {
             'service': self.service_key,
             'cpage': 1,
-            'rows': row,
-            'stdate': yesterday,
-            'eddate': yesterday
+            'rows': row
         }
         response = requests.get(url, params=params).text
 

@@ -3,6 +3,8 @@ import os
 from bs4 import BeautifulSoup
 import requests
 from prf_tools import *
+from datetime import datetime, timedelta
+from pytz import timezone
 
 
 class PrfCaller:
@@ -11,12 +13,15 @@ class PrfCaller:
         self.service_key = os.environ['KOPIS_SERVICE_KEY']
 
     def get_id_list(self, row, prfstate):
+        yesterday = (datetime.now(timezone('Asia/Seoul')).date() - timedelta(1)).strftime("%Y%m%d")
         url = "http://kopis.or.kr/openApi/restful/pblprfr"
         params = {
             'service': self.service_key,
             'cpage': 1,
             'rows': row,
-            'prfstate': prfstate
+            'prfstate': prfstate,
+            'eddate': yesterday,
+            'stdate': yesterday
         }
         response = requests.get(url, params=params).text
 
