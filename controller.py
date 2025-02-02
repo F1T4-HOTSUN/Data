@@ -22,20 +22,17 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(stream_handler)
 
 fclty_new_list = FcltyCaller().get_id_list(100)
-print('fclty_new_list :', fclty_new_list)
 old_list = FcltyDAO().select_id_list()
 added_facilities = ListCheck().get_added_list(fclty_new_list, old_list)
-print('added_facilities:', added_facilities)
 
 fclty_data = []
 for id in added_facilities:
     fclty_data.append(FcltyCaller().get_facility(id))
 
-print(fclty_data)
 FcltyDAO().insert_data(fclty_data)
 
-prf_new_list = PrfCaller().get_id_list(5000, '01')
-prf_new_list.extend(PrfCaller().get_id_list(1000, '02'))
+prf_new_list = PrfCaller().get_id_list(100, '01')
+prf_new_list.extend(PrfCaller().get_id_list(100, '02'))
 old_list = PrfDAO().select_prf_id_list()
 added_performances = ListCheck().get_added_list(prf_new_list, old_list)
 
@@ -57,7 +54,7 @@ print(prf_data)
 PrfDAO().insert_prf_data(prf_data)
 PrfDAO().insert_session_data(session_list)
 
-# rank_data = RankCaller().get_rank()
-# RankDAO().delete_rank_data()
-# RankDAO().insert_rank_data(rank_data)
+rank_data = RankCaller().get_rank()
+RankDAO().delete_rank_data()
+RankDAO().insert_rank_data(rank_data)
 

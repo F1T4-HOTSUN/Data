@@ -25,8 +25,6 @@ class PrfCaller:
         }
         response = requests.get(url, params=params).text
 
-        print('prf_res', response)
-
         xmlobj = BeautifulSoup(response, 'lxml-xml')
 
         list = [id.string for id in xmlobj.find_all("mt20id")]
