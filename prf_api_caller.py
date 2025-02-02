@@ -20,8 +20,11 @@ class PrfCaller:
             'cpage': 1,
             'rows': row,
             #'prfstate': prfstate,
+            # 데이터가 최대한 필요해서 임시로 날짜 넣음
+            #'eddate': yesterday,
+            #'stdate': yesterday
             'eddate': yesterday,
-            'stdate': yesterday
+            'stdate': '20240101'
         }
         response = requests.get(url, params=params).text
 

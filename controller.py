@@ -50,7 +50,6 @@ session_list = []
 for prf in prf_data:
     session_list += Session().session_data(prf['performance_id'], prf['dtguidance'], prf['prf_start_date'], prf['prf_end_date'], hol_list)
 
-print(prf_data)
 PrfDAO().insert_prf_data(prf_data)
 PrfDAO().insert_session_data(session_list)
 
