@@ -10,11 +10,11 @@ class FcltyCaller:
         data = {}
         self.service_key = os.environ['KOPIS_SERVICE_KEY']
 
-    def get_id_list(self, row):
+    def get_id_list(self, row, page):
         url = "http://www.kopis.or.kr/openApi/restful/prfplc"
         params = {
             'service': self.service_key,
-            'cpage': 2,
+            'cpage': page,
             'rows': row
         }
         response = requests.get(url, params=params).text

@@ -21,9 +21,20 @@ stream_handler = logging.StreamHandler()
 stream_handler.setFormatter(formatter)
 logger.addHandler(stream_handler)
 
-fclty_new_list = FcltyCaller().get_id_list(100)
-old_list = FcltyDAO().select_id_list()
-added_facilities = ListCheck().get_added_list(fclty_new_list, old_list)
+# fclty_new_list = FcltyCaller().get_id_list(100)
+# old_list = FcltyDAO().select_id_list()
+# added_facilities = ListCheck().get_added_list(fclty_new_list, old_list)
+
+fclty_new_list = set()  # 새로운 시설 ID를 저장할 집합 (중복 방지)
+old_list = set(FcltyDAO().select_id_list())  # 기존 ID 리스트를 집합으로 변환
+
+# 반복하여 데이터 수집
+for i in range(2, 33):
+    new_ids = set(FcltyCaller().get_id_list(100, i))  # i 값을 추가하여 get_id_list 호출
+    fclty_new_list.update(new_ids)  # 새로운 데이터를 누적하여 추가
+
+# old_list와 비교하여 추가된 시설 ID 리스트를 생성
+added_facilities = ListCheck().get_added_list(list(fclty_new_list), list(old_list))
 
 fclty_data = []
 for id in added_facilities:
