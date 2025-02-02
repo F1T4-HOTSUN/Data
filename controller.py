@@ -29,6 +29,7 @@ fclty_data = []
 for id in added_facilities:
     fclty_data.append(FcltyCaller().get_facility(id))
 
+print(fclty_data)
 FcltyDAO().insert_data(fclty_data)
 
 prf_new_list = PrfCaller().get_id_list(5000, '01')
@@ -50,6 +51,7 @@ session_list = []
 for prf in prf_data:
     session_list += Session().session_data(prf['performance_id'], prf['dtguidance'], prf['prf_start_date'], prf['prf_end_date'], hol_list)
 
+print(prf_data)
 PrfDAO().insert_prf_data(prf_data)
 PrfDAO().insert_session_data(session_list)
 
