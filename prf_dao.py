@@ -77,12 +77,27 @@ class PrfDAO:
             self.conn.close()
             return list
 
+    # def insert_session_data(self, data):
+    #     try:
+    #         sql = (
+    #                 "INSERT INTO prf_session(performance_id, prf_session_date, prf_session_time, remaining_seat, total_seat) VALUES " +
+    #                 "(%(performance_id)s, %(prf_session_date)s, " +
+    #                 "%(prf_session_time)s, %(remaining_seat)s, %(total_seat)s);")
+    #         self.curs.executemany(sql, data)
+    #         self.conn.commit()
+    #     except Exception as e:
+    #         print("Exception occured:{}".format(e))
+    #     finally:
+    #         self.conn.close()
+
     def insert_session_data(self, data):
         try:
-            sql = (
-                    "INSERT INTO prf_session(performance_id, prf_session_date, prf_session_time, remaining_seat, total_seat) VALUES " +
-                    "(%(performance_id)s, %(prf_session_date)s, " +
-                    "%(prf_session_time)s, %(remaining_seat)s, %(total_seat)s);")
+            sql = """
+            INSERT INTO prf_session(performance_id, prf_session_date, prf_session_time, remaining_seat, total_seat) 
+            SELECT %(performance_id)s, %(prf_session_date)s, %(prf_session_time)s, %(remaining_seat)s, %(total_seat)s
+            FROM performance 
+            WHERE performance_id = %(performance_id)s
+            """
             self.curs.executemany(sql, data)
             self.conn.commit()
         except Exception as e:
