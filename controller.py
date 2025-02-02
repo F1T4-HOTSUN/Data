@@ -29,7 +29,7 @@ fclty_data = []
 for id in added_facilities:
     fclty_data.append(FcltyCaller().get_facility(id))
 
-FcltyDAO().insert_data(fclty_data)-
+FcltyDAO().insert_data(fclty_data)
 
 prf_new_list = PrfCaller().get_id_list(5000, '01')
 prf_new_list.extend(PrfCaller().get_id_list(1000, '02'))
