@@ -20,9 +20,24 @@ class RankDAO:
         except Exception as e:
             print("Exception occured:{}".format(e))
 
+    # def insert_rank_data(self, data):
+    #     try:
+    #         sql = ("INSERT INTO prf_rank(performance_id, rnum, basedate) VALUES (%(performance_id)s, %(rnum)s, %(basedate)s);")
+    #         self.curs.executemany(sql, data)
+    #         self.conn.commit()
+    #     except Exception as e:
+    #         print("Exception occured:{}".format(e))
+    #     finally:
+    #         self.conn.close()
+
     def insert_rank_data(self, data):
         try:
-            sql = ("INSERT INTO prf_rank(performance_id, rnum, basedate) VALUES (%(performance_id)s, %(rnum)s, %(basedate)s);")
+            sql = """
+                INSERT INTO prf_rank(performance_id, rnum, basedate) 
+                SELECT %(performance_id)s, %(rnum)s, %(basedate)s 
+                FROM performance 
+                WHERE performance_id = %(performance_id)s
+            """
             self.curs.executemany(sql, data)
             self.conn.commit()
         except Exception as e:
